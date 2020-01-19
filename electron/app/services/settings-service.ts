@@ -1,6 +1,7 @@
 import { logManager } from '../log-manager';
-import { Settings } from '../models/Settings';
-import { TrackItem } from '../models/TrackItem';
+
+import { Settings, TrackItem } from '../Database';
+import { Settings as SettingsType } from '../models/Settings';
 
 export class SettingsService {
     logger = logManager.getLogger('SettingsService');

@@ -21,12 +21,10 @@ export class AppTrackItemJob {
 
             if (!BackgroundUtils.isSameItems(updatedItem, this.lastUpdatedItem)) {
                 logger.debug('App and title changed. Analysing title');
-                taskAnalyser
-                    .analyseAndNotify(updatedItem)
-                    .then(
-                        () => logger.debug('Analysing has run.'),
-                        e => logger.error('Error in Analysing', e),
-                    );
+                taskAnalyser.analyseAndNotify(updatedItem).then(
+                    () => logger.debug('Analysing has run.'),
+                    e => logger.error('Error in Analysing', e),
+                );
             }
 
             this.lastUpdatedItem = updatedItem;
@@ -54,7 +52,6 @@ export class AppTrackItemJob {
         rawItem.endDate = new Date();
 
         if (!result.app) {
-            logger.debug('rawitem has no app', result);
             if (result.owner && result.owner.name) {
                 rawItem.app = result.owner.name;
             } else {
@@ -71,7 +68,7 @@ export class AppTrackItemJob {
             rawItem.title = result.title.replace(/\n$/, '').replace(/^\s/, '');
         }
 
-        logger.debug('Active window (parsed):', rawItem);
+        // logger.debug('Active window (parsed):', rawItem);
 
         let savedItem = await backgroundService.createOrUpdate(rawItem);
         return savedItem;

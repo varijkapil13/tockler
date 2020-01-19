@@ -3,12 +3,13 @@ import { settingsService } from './settings-service';
 import { State } from '../enums/state';
 import { stateManager } from '../state-manager';
 import { Op } from 'sequelize';
-import { TrackItem } from '../models/TrackItem';
+import { TrackItem } from '../Database';
+import { TrackItem as TrackItemType } from '../models/TrackItem';
 
 export class TrackItemService {
     logger = logManager.getLogger('TrackItemService');
 
-    async createTrackItem(trackItemAttributes: TrackItem): Promise<TrackItem> {
+    async createTrackItem(trackItemAttributes: TrackItemType): Promise<TrackItemType> {
         let trackItem = await TrackItem.create(trackItemAttributes);
         this.logger.info(`Created trackItem :`, trackItem.toJSON());
         return trackItem;
@@ -17,7 +18,7 @@ export class TrackItemService {
     async updateTrackItemByName(
         name: string,
         trackItemAttributes: any,
-    ): Promise<[number, Array<TrackItem>]> {
+    ): Promise<[number, Array<TrackItemType>]> {
         // TODO: not used
         let results = await TrackItem.update(trackItemAttributes, {
             where: { name: name },
@@ -32,7 +33,7 @@ export class TrackItemService {
         return results;
     }
 
-    async updateTrackItem(itemData: TrackItem, id: number): Promise<[number, TrackItem[]]> {
+    async updateTrackItem(itemData: TrackItemType, id: number): Promise<[number, TrackItemType[]]> {
         let item = await TrackItem.update(
             {
                 app: itemData.app,
