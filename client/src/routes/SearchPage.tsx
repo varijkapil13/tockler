@@ -69,12 +69,10 @@ export function SearchPage({ location }: any) {
         event.preventDefault();
     };
 
-    console.info('searchPaging', searchPaging);
-
     return (
         <MainLayout location={location}>
             <form onSubmit={onSubmit}>
-                <Flex p={1} w={1} flexDirection="column">
+                <Flex p={1} width={1} flexDirection="column">
                     <Flex p={1}>
                         <Input
                             placeholder="Search from all items"
@@ -82,13 +80,13 @@ export function SearchPage({ location }: any) {
                                 name: 'search',
                             })}
                         />
-                        <Box pl={1}>
+                        <Box px={2}>
                             <Button type="primary" htmlType="submit">
                                 Search
                             </Button>
                         </Box>
 
-                        <Box pl={1}>
+                        <Box px={2}>
                             <Button
                                 onClick={() => {
                                     exportItems(formState.values.search);
